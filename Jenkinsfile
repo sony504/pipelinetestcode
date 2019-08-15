@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "windows"
+        label "linux"
     }
     tools {
         maven 'Maven3.3.9'
@@ -9,9 +9,11 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                bat '''
-                    echo "PATH = %PATH%"
-                    echo "M2_HOME = %M2_HOME%"
+              
+                    export M2_HOME=/usr/local/apache-maven
+                    export M2=$M2_HOME/bin
+                    export PATH=$M2:$PATH
+ 
                 '''
             }
         }
